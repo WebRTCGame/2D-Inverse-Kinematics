@@ -1,75 +1,83 @@
+var pi = [];
+for (var i = -3;i<4;i)
+
 function onLoad() {
 
 	var endEffectorName = "end";
 
 	var jointDescs = [{
 
-		rootName : "n0",
-		length : 10,
-		angle : Math.PI / 2,
-		joints : [{
+		rootName: "n0",
+		length: 10,
+		angle: Math.PI / 2,
+		joints: [{
 
-			length : 25,
-			angle : Math.PI / 6,
-			joints : [{
+			length: 15,
+			angle: Math.PI / 6,
+			joints: [{
 
-				lname : endEffectorName,
-				length : 15,
-				angle : Math.PI / 2,
+				lname: endEffectorName,
+				length: 15,
+				angle: Math.PI / 2,
+			},{
+
+				lname: endEffectorName,
+				length: 15,
+				angle: Math.PI / 2,
 			}]
 		}]
 	}, {
 
-		rootName : "n0",
-		length : 20,
-		angle : Math.PI / 3,
-		joints : [{
+		rootName: "n0",
+		length: 20,
+		angle: Math.PI / 3,
+		joints: [{
 
-			length : 15,
-			angle : -Math.PI / 3,
-			joints : [{
+			length: 15,
+			angle: -Math.PI / 3,
+			joints: [{
 
-				length : 18,
-				angle : -Math.PI / 3,
-				joints : [{
+				length: 18,
+				angle: -Math.PI / 3,
+				joints: [{
 
-					length : 18,
-					angle : Math.PI / 2,
-					joints : [{
+					length: 18,
+					angle: Math.PI / 2,
+					joints: [{
 
-						lname : endEffectorName,
-						length : 18,
-						angle : Math.PI / 3
+						lname: endEffectorName,
+						length: 18,
+						angle: Math.PI / 3
 					}]
 				}]
 			}]
 		}]
 	}, {
 
-		rootName : "n0",
-		length : 20,
-		angle : 0,
-		joints : [{
+		rootName: "n0",
+		length: 20,
+		angle: 0,
+		joints: [{
 
-			length : 15,
-			angle : -Math.PI / 3 * 2,
-			joints : [{
+			length: 15,
+			angle: -Math.PI / 3 * 2,
+			joints: [{
 
-				lname : endEffectorName,
-				length : 18,
-				angle : Math.PI / 3,
+				lname: endEffectorName,
+				length: 18,
+				angle: Math.PI / 3,
 			}]
 		}]
 	}, {
 
-		rootName : "n0",
-		length : 30,
-		angle : Math.PI / 4 * 3,
-		joints : [{
+		rootName: "n0",
+		length: 30,
+		angle: Math.PI / 4 * 3,
+		joints: [{
 
-			lname : endEffectorName,
-			length : 25,
-			angle : -Math.PI / 6,
+			lname: endEffectorName,
+			length: 25,
+			angle: -Math.PI / 6,
 		}]
 	}];
 
@@ -98,12 +106,12 @@ function onLoad() {
 	var context = canvas.getContext("2d");
 	var flipbook = new fb.Flipbook({
 
-		w : 200,
-		h : 64,
-		cx : 0,
-		cy : 0,
-		canvasId : "splash_canvas",
-		retain : false
+		w: 200,
+		h: 64,
+		cx: 0,
+		cy: 0,
+		canvasId: "splash_canvas",
+		retain: false
 	});
 
 	// Set up scene and update callback.
@@ -118,7 +126,7 @@ function onLoad() {
 		// All the shapes for a joint hierarchy are contained in this
 		// composition.
 		var jointSetComp = new fb.Composite({
-			transforms : [["t", [rootPos[0], rootPos[1]]]]
+			transforms: [["t", [rootPos[0], rootPos[1]]]]
 		});
 
 		var constructDisplay = function(node) {
@@ -137,19 +145,20 @@ function onLoad() {
 			if (node.joints.length == 0) {
 
 				endShape = new fb.Circle({
-					center : pos2,
-					radius : rtip,
-					strokeStyle : "orange",
-					lineWidth : 0.1
+					center: pos2,
+					radius: rtip,
+					strokeStyle: "green",
+					lineWidth: 0.1
 				});
 
-			} else {
+			}
+			else {
 
 				endShape = new fb.Circle({
-					center : pos2,
-					radius : rscrew,
-					strokeStyle : "orange",
-					lineWidth : 0.1
+					center: pos2,
+					radius: rscrew,
+					strokeStyle: "orange",
+					lineWidth: 0.1
 				});
 			}
 			node.endShape = endShape;
@@ -167,25 +176,25 @@ function onLoad() {
 			// Set the length and sizes of ends of the arm (joint).
 			var armLength = pjoint.length;
 			var halfSmallWidth = 0.5;
-			var halfLargeWidth = 3.5;
+			var halfLargeWidth = 2.5;
 
 			var armShape = new fb.Composite({
 
-				children : [new fb.Path({
+				children: [new fb.Path({
 
-					vers : [[-armLength - halfLargeWidth, rscrew], [-armLength, halfLargeWidth], [rscrew, halfSmallWidth], [rscrew, -halfSmallWidth], [-armLength, -halfLargeWidth], [-armLength - halfLargeWidth, -rscrew]],
-					close : true,
-					strokeStyle : "rgba(119, 204, 221, 0.7)",
-					fillStyle : "rgba(153, 238, 255, 0.1)",
-					lineWidth : 0.2
+					vers: [[-armLength - halfLargeWidth, rscrew], [-armLength, halfLargeWidth], [rscrew, halfSmallWidth], [rscrew, -halfSmallWidth], [-armLength, -halfLargeWidth], [-armLength - halfLargeWidth, -rscrew]],
+					close: true,
+					strokeStyle: "rgba(119, 204, 221, 0.7)",
+					fillStyle: "rgba(153, 238, 255, 0.1)",
+					lineWidth: 0.2
 
 				}), new fb.Path({
 
-					vers : [[0, 0], [-armLength, 0]],
-					strokeStyle : "#def",
-					lineWidth : 0.2
+					vers: [[0, 0], [-armLength, 0]],
+					strokeStyle: "#def",
+					lineWidth: 0.2
 				})],
-				transforms : [[rtrans2[0][0], rtrans2[1][0], rtrans2[0][1], rtrans2[1][1], rtrans2[0][2], rtrans2[1][2]]],
+				transforms: [[rtrans2[0][0], rtrans2[1][0], rtrans2[0][1], rtrans2[1][1], rtrans2[0][2], rtrans2[1][2]]],
 			});
 			node.armShape = armShape;
 
@@ -210,10 +219,10 @@ function onLoad() {
 
 		var textShape = new fb.Text({
 
-			text : text[i],
-			font : "40px 'Times New Roman'",
-			fillStyle : "rgba(0, 0, 0, 0.4)",
-			lineWidth : 0.4
+			text: text[i],
+			font: "20px 'Times New Roman'",
+			fillStyle: "rgba(0, 0, 0, 0.4)",
+			lineWidth: 0.4
 		});
 
 		textShapes.push(textShape);
@@ -250,7 +259,7 @@ function onLoad() {
 
 			// Stop stepping the IK if the goal position is close enough.
 			var eps = 1e-6;
-			if(IK.vmag2(IK.vsub(relGoalPos, curEndPos)) < eps) continue;
+			if (IK.vmag2(IK.vsub(relGoalPos, curEndPos)) < eps) continue;
 
 			endEffector.stepIk(relGoalPos, dt);
 
@@ -278,7 +287,7 @@ function onLoad() {
 
 		// Move some or all of them.
 		for (var i = 1; i < 2; ++i) {
-			
+
 			var goalCenterPos = goalCenterPositions[i];
 			var goalPos = [goalCenterPos[0] + Math.cos(goalAngles[i]) * goalRadii[i], goalCenterPos[1] + Math.sin(goalAngles[i]) * goalRadii[i]];
 			goalAngles[i] += goalAngleVelocities[i] * dt;
